@@ -1,4 +1,10 @@
-from flask import render_template
+from flask import (
+    render_template,
+    url_for,
+    redirect,
+    flash,
+    request
+)
 
 from app import app, db
 from .models import Message
@@ -6,7 +12,8 @@ from .forms import MessageForm
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    form = MessageForm(request.form)
+    return render_template('home.html', form=form)
 
 
 @app.route('/send_message', methods=['GET', 'POST'])
@@ -21,6 +28,7 @@ def send_message():
         db.session.add(message)
         db.session.commit()
 
-        return render_template('success.html')
+        flash('Message envoyé. Nous reviendrons à vous très bientôt.')
+        return redirect(url_for('home'))
 
     return render_template('home.html', form=form)
