@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="utf-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block head_title %}
+            La maison de l'architecte
+        {% endblock head_title %}
+    </title>
+    <meta name="description" content="Le site de la maison de l'architecture">
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style type="text/css"> 
+
+      /* Styles de base */
+      body {
+        background: url('{{ url_for("static", filename="img/fond.jpg") }}') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+      }
+
+      /* Images */
+      img {
+        width: 100%;
+      }
+
+      .jumbotron {
+      	background-color: rgba(214, 214, 214, 0.5);
+      }
+
+      footer {
+        margin-bottom: 20px;
+      }
+
+    </style>
+
+  </head>
+
+  <body id="page-top" data-spy="scroll" data-target=".navbar">
+
+    {% include 'includes/_nav.html' %}
+
+    {% include 'includes/_carousel.html' %} 
+
+    <!-- Corps de page
+    ================================================== -->
+    <div class="container">
+        {% block body %}
+        {% endblock body %}
+    </div>
+
+    {% include 'includes/_footer.html' %}
+    
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- Javascript de Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script>
+      // Scrollspy fluide
+      $(function () {
+        $('header a').on('click', function(e) {
+          e.preventDefault();
+          var hash = this.hash;
+          $('html, body').animate({
+            scrollTop: $(this.hash).offset().top
+          }, 1000, function(){
+            window.location.hash = hash;
+          });
+        });
+
+        // // handling of the active class of the navbar
+        // $('.navbar-nav > li, .navbar-brand').click(function() {
+        // 	$('.navbar-nav > li').removeClass('active');
+        // 	$(this).addClass('active');
+        // });
+      });
+    </script>
+
+  </body>
+
+</html>
