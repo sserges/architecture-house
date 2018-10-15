@@ -22,7 +22,7 @@
 
 	<div class="jumbotron" id="contact">
 	  <h1 class="text-center">Un message pour nous ?</h1>
-	  <form class="row" method="POST" action="">
+	  <form class="row" method="POST" action="{{ url_for('send_message') }}">
 	    <div class="form-group col-lg-4">
 	      <!-- <input type="email" class="form-control" placeholder="Votre email"> -->
 	      {{ render_field(form.email, class_="form-control", required="required", placeholder="Votre email") }}

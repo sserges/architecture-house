@@ -28,7 +28,7 @@ def send_message():
         db.session.add(message)
         db.session.commit()
 
-        flash('Message envoyé. Nous reviendrons à vous très bientôt.')
+        flash('Message envoyé. Nous reviendrons à vous très bientôt.', 'success')
         return redirect(url_for('home'))
 
     return render_template('home.html', form=form)
