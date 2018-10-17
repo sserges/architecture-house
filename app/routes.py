@@ -7,7 +7,7 @@ from flask import (
 )
 
 from app import app, db
-from .models import Message
+from .models import Message, Post
 from .forms import MessageForm
 
 @app.route('/')
@@ -32,3 +32,9 @@ def send_message():
         return redirect(url_for('home'))
 
     return render_template('home.html', form=form)
+
+
+@app.route('/blog')
+def home_blog():
+    posts = Post.query.all()
+    return render_template('blog/home_blog.html', posts=posts)

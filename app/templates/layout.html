@@ -78,7 +78,7 @@
     <script>
       // Scrollspy fluide
       $(function () {
-        $('header a').on('click', function(e) {
+        $('header a:lt(5)').on('click', function(e) {
           e.preventDefault();
           var hash = this.hash;
           $('html, body').animate({
