@@ -1,4 +1,4 @@
-from app import app, db
+from app import app
 from app.models import Message
 from app.utils import cls
 
