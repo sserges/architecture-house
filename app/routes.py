@@ -19,17 +19,20 @@ def home():
 @app.route('/send_message', methods=['GET', 'POST'])
 def send_message():
     form = MessageForm(request.form)
-    if request.method == 'POST' and form.validate():
-        email = str(form.email.data).strip()
-        content = str(form.content.data).strip()
+    if request.method == 'POST':
+        if form.validate():
+            email = str(form.email.data).strip()
+            content = str(form.content.data).strip()
 
-        message = Message(email=email, content=content)
+            message = Message(email=email, content=content)
 
-        db.session.add(message)
-        db.session.commit()
+            db.session.add(message)
+            db.session.commit()
 
-        flash('Votre message a été envoyé avec succès. Nous reviendrons à vous très bientôt.', 'success')
-        return redirect(url_for('home'))
+            flash('Votre message a été envoyé avec succès. Nous reviendrons à vous très bientôt.', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Erreur ! Veuillez vérifier les données saisies.', 'danger')
 
     return render_template('home.html', form=form)
 

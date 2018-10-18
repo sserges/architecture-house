@@ -42,7 +42,7 @@ class MyModelView(sqla.ModelView):
 
 admin = flask_admin.Admin(
     app,
-    "La maison de l'architecte: Auth",
+    "La maison de l'architecte: Administration",
     base_template='my_master.html',
     template_mode='bootstrap3',
 )
