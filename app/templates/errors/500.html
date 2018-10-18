@@ -1,1 +1,10 @@
-<h1>500</h1>
+{% extends 'errors/error_layout.html' %}
+
+{% block head_title %}
+    {{ super() }} - 500 Error
+{% endblock head_title %}
+
+{% block body %}
+    <h1>500</h1>
+    <p>Désolé une erreur est survenue sur le serveur, Nous allons le corriger bientôt.</p>     
+{% endblock body %}

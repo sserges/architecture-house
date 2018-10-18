@@ -1,1 +1,11 @@
-<h1>404</h1>
+{% extends 'errors/error_layout.html' %}
+
+{% block head_title %}
+    {{ super() }} - 404 Error
+{% endblock head_title %}
+
+{% block body %}
+    <h1>404</h1>
+    <p>Désolé la maison de vos rêves n'est pas ici.</p>
+    {{ super() }}        
+{% endblock body %}

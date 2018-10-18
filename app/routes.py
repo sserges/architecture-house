@@ -12,6 +12,7 @@ from .forms import MessageForm
 
 @app.route('/')
 def home():
+    f
     form = MessageForm(request.form)
     return render_template('home.html', form=form)
 
