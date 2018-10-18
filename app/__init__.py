@@ -1,9 +1,15 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 from config import Config
-# from app.models import Post, Message
+
+sentry_sdk.init(
+    dsn="https://2082154564484487b9776c31a11a125b@sentry.io/1303605",
+    integrations=[FlaskIntegration()]
+)
 
 app = Flask(__name__)
 app.config.from_object(Config)
