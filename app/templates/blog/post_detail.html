@@ -1,0 +1,42 @@
+{% extends 'blog/blog_layout.html' %}
+
+{% block active %}
+  <li class="active"><a href="{{ url_for('post_detail', id=post.id) }}">Article: {{ post.title }}</a></li>
+{% endblock active %}
+
+
+{% block body %}
+    <div>
+        <h1 class="title">#{{ post.id }} - {{ post.title }}</h1>
+        <p class="content">{{ post.content }}</p>
+    </div>
+
+    <hr/>
+
+    <p>
+        <a href="{{ url_for('home_blog') }}">Retour</a>
+    </p>
+
+    <div>
+        <p class="lead">Comments</p>
+
+        <form method="POST" action=".">
+            <input type="submit" value="Post comment" class="btn btn-default" />
+        </form>
+
+        <hr/>
+        
+        {% for comment in post.comments %}
+            <blockquote>
+                <p>
+                    {{ comment.content }}
+                </p>
+                <footer>
+                    via {{ comment.author_name }}
+                </footer>
+            </blockquote>
+        {% endfor %}
+
+    </div>
+
+{% endblock body %}

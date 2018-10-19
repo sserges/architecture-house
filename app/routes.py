@@ -10,14 +10,9 @@ from app import app, db
 from .models import Message, Post
 from .forms import MessageForm
 
-@app.route('/')
+
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    form = MessageForm(request.form)
-    return render_template('home.html', form=form)
-
-
-@app.route('/send_message', methods=['GET', 'POST'])
-def send_message():
     form = MessageForm(request.form)
     if request.method == 'POST':
         if form.validate():
@@ -37,7 +32,13 @@ def send_message():
     return render_template('home.html', form=form)
 
 
-@app.route('/blog')
+@app.route('/blog/posts/')
 def home_blog():
     posts = Post.query.all()
-    return render_template('blog/home_blog.html', posts=posts)
+    return render_template('blog/post_list.html', posts=posts)
+
+
+@app.route('/blog/posts/<int:id>')
+def post_detail(id):
+    post = Post.query.filter_by(id=id).first_or_404()
+    return render_template('blog/post_detail.html', post=post)

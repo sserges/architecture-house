@@ -56,7 +56,9 @@
                   <li><a href="{{ url_for('home') }}#accueil">Accueil</a></li>
                   <li><a href="{{ url_for('home') }}#qui">Qui sommes-nous ?</a></li>
                   <li><a href="{{ url_for('home') }}#contact">Contact</a></li>
-            <li class="active"><a href="{{ url_for('home_blog') }}">Notre Blog</a></li>
+                  {% block active %}
+                    <li class="active"><a href="{{ url_for('home_blog') }}">Notre Blog</a></li>
+                  {% endblock active %}
                 </ul>
               </div>
         </nav>
@@ -68,22 +70,6 @@
     ================================================== -->
     <div class="container" style="margin-top: 70px;">
         {% block body %}
-
-            {% for post in posts %}
-                <article>
-                    <h2 class="title">
-                        <a href="#">#{{ post.id }} - {{ post.title }}</a>
-                    </h2>
-                    <p class="time">
-                        <time datetime="{{ post.created_at }}">
-                            Posted {{ post.created_at }}
-                        </time>
-                    </p>
-                    <p class="content">{{ post.content }}</p>
-                </article>
-            {% else %}
-                <p>Sorry, no posts available.</p>
-            {% endfor %}
         {% endblock body %}
     </div>
 
