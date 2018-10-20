@@ -7,8 +7,8 @@ from flask import (
 )
 
 from app import app, db
-from .models import Message, Post
-from .forms import MessageForm
+from .models import Message, Post, Comment
+from .forms import MessageForm, CommentForm
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -38,7 +38,28 @@ def home_blog():
     return render_template('blog/post_list.html', posts=posts)
 
 
-@app.route('/blog/posts/<int:id>')
+@app.route('/blog/posts/<int:id>', methods=['GET', 'POST'])
 def post_detail(id):
     post = Post.query.filter_by(id=id).first_or_404()
-    return render_template('blog/post_detail.html', post=post)
+    form = CommentForm(request.form)
+    if request.method == 'POST':
+        if form.validate():
+            name = str(form.name.data).strip()
+            content = str(form.content.data).strip()
+            new_comment = Comment(
+                author_name=name,
+                content=content,
+                post_id=post.id
+            )
+
+            db.session.add(new_comment)
+            db.session.commit()
+
+            return redirect(url_for('post_detail', id=post.id))
+
+    context = {
+        'post': post,
+        'form': form,
+    }
+
+    return render_template('blog/post_detail.html', **context)

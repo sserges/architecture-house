@@ -12,7 +12,10 @@
                     Posted {{ post.created_at }}
                 </time>
             </p>
-            <p class="content">{{ post.content|truncate }}</p>
+            <p class="content">
+                {{ post.content|truncate }} 
+                <a href="{{ url_for('post_detail', id=post.id) }}">Lire la suite</a>
+            </p>
         </article>
     {% else %}
         <p>Sorry, no posts available.</p>
