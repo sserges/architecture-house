@@ -40,6 +40,16 @@ class MyModelView(sqla.ModelView):
                 return redirect(url_for('security.login', next=request.url))
 
 
+class PostView(MyModelView):
+    create_template = 'blog/post_create.html'
+    edit_template = 'blog/post_edit.html'
+    form_widget_args = {
+        'content': {
+            'id': 'editor'
+        }
+    }
+
+
 admin = flask_admin.Admin(
     app,
     "La maison de l'architecte: Administration",
@@ -50,7 +60,7 @@ admin = flask_admin.Admin(
 admin.add_view(MyModelView(User, db.session))
 admin.add_view(MyModelView(Role, db.session))
 admin.add_view(MyModelView(Message, db.session))
-admin.add_view(MyModelView(Post, db.session))
+admin.add_view(PostView(Post, db.session))
 admin.add_view(MyModelView(Comment, db.session))
 
 # Setup Flask-Security
